@@ -1,13 +1,7 @@
 #EXTM3U
-
 #EXTINF:-1 tvg-id="MRTV4.mm" tvg-logo="https://firebasestorage.googleapis.com/v0/b/movie-189fa.appspot.com/o/mm_mov%2FIMG_20221222_232353.png?alt=media&token=f320126c-b74e-4161-9128-0ab980671b7f" group-title="Myanmar",MRTV4
-
 https://foreveralive1-a.akamaihd.net/7cbf965de49a4f308eb64b980e690a38/ap-southeast-1/6057949479001/profile_2/chunklist.m3u8
-
 #EXTINF:-1 tvg-id="GOLDEN LAND.mm" tvg-logo="https://firebasestorage.googleapis.com/v0/b/movie-189fa.appspot.com/o/mm_mov%2FIMG_20221223_144221.png?alt=media&token=381d6362-fa60-438d-8ade-3e8b6140042a" group-title="Myanmar",Golden Land
-
 http://203.81.84.130/hls/mwd_movie/index.m3u8
-
 #EXTINF:-1 tvg-id="FightSport.eng" tvg-logo="https://i.imgur.com/nV55veq.png" group-title="Sport",Fight Sport
-
 https://shls-fight-sports-ak.akamaized.net/out/v1/ee7e6475b12e484bbfa5c31461ad4306/index.m3u8
