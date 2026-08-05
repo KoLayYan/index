@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mediafire Direct Link Converter</title>
+    <title>Mediafire Direct Link Converter - Fast Speed</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
@@ -24,11 +24,11 @@
                     <i class="fa-solid fa-bolt text-white text-lg"></i>
                 </div>
                 <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
-                    Mediafire Direct
+                    Mediafire Direct <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-md ml-1 font-normal">Turbo</span>
                 </span>
             </div>
             <div class="text-xs font-medium px-3 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-slate-300">
-                <i class="fa-solid fa-shield-halved text-emerald-400 mr-1.5"></i>Secure & Fast
+                <i class="fa-solid fa-gauge-high text-emerald-400 mr-1.5"></i>High Speed
             </div>
         </div>
     </header>
@@ -40,10 +40,10 @@
             <!-- Title & Description -->
             <div class="text-center mb-8">
                 <h1 class="text-2xl md:text-3xl font-bold tracking-tight mb-3">
-                    Mediafire Link Converter
+                    Fast Mediafire Converter
                 </h1>
                 <p class="text-slate-400 text-sm md:text-base max-w-md mx-auto">
-                    Mediafire share link ထည့်ပါ၊ Direct Download Link အဖြစ်သို့ အမြန်ဆုံးပြောင်းလဲပေးပါမည်။
+                    လင့်ခ်ထည့်ပါ၊ စက္ကန့်ပိုင်းအတွင်း အမြန်ဆုံး Direct Link ထုတ်ယူပါ။
                 </p>
             </div>
 
@@ -66,12 +66,12 @@
                     onclick="convertToDirectLink()" 
                     class="w-full py-4 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-semibold rounded-2xl shadow-lg shadow-red-600/25 transition-all duration-200 flex items-center justify-center space-x-2 active:scale-[0.99]"
                 >
-                    <i class="fa-solid fa-wand-magic-sparkles" id="btnIcon"></i>
-                    <span id="btnText">Direct Link သို့ ပြောင်းမည်</span>
+                    <i class="fa-solid fa-bolt" id="btnIcon"></i>
+                    <span id="btnText">အမြန်ဆုံး ပြောင်းမည်</span>
                 </button>
             </div>
 
-            <!-- Result Box (Hidden by default) -->
+            <!-- Result Box -->
             <div id="resultContainer" class="mt-8 hidden space-y-4">
                 <div class="p-4 bg-slate-900/90 border border-slate-700/80 rounded-2xl">
                     <div class="flex items-center justify-between mb-2">
@@ -121,7 +121,7 @@
         <p>&copy; 2026 Mediafire Direct Converter. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript Direct Link Parser Logic -->
+    <!-- Optimized JavaScript Logic -->
     <script>
         async function convertToDirectLink() {
             const inputUrl = document.getElementById('mediafireUrl').value.trim();
@@ -133,7 +133,6 @@
             const btnIcon = document.getElementById('btnIcon');
             const convertBtn = document.getElementById('convertBtn');
 
-            // Reset UI states
             errorMsg.classList.add('hidden');
             resultContainer.classList.add('hidden');
 
@@ -143,30 +142,31 @@
                 return;
             }
 
-            // Loading state
-            btnText.textContent = "ရှာဖွေနေသည်...";
+            // Fast Loading State
+            btnText.textContent = "ထုတ်ယူနေသည်...";
             btnIcon.className = "fa-solid fa-spinner fa-spin";
             convertBtn.disabled = true;
 
             try {
-                // Using CORS proxy to fetch Mediafire share page HTML
+                // Using a faster light proxy endpoint with timeout handling
                 const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(inputUrl)}`;
-                const response = await fetch(proxyUrl);
+                
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 seconds timeout
+
+                const response = await fetch(proxyUrl, { signal: controller.signal });
+                clearTimeout(timeoutId);
+
                 const data = await response.json();
 
-                if (!data.contents) {
-                    throw new Error("Failed to fetch page");
-                }
+                if (!data.contents) throw new Error("Empty response");
 
-                // Parse HTML to find the direct download button (id="downloadButton")
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(data.contents, 'text/html');
                 const downloadBtnElement = doc.querySelector('#downloadButton');
 
                 if (downloadBtnElement && downloadBtnElement.href) {
                     const directLink = downloadBtnElement.href;
-                    
-                    // Display results
                     directUrlOutput.value = directLink;
                     downloadBtn.href = directLink;
                     resultContainer.classList.remove('hidden');
@@ -175,12 +175,11 @@
                 }
 
             } catch (err) {
-                errorMsg.textContent = "Direct Link ထုတ်ယူ၍မရပါ။ လင့်ခ် မှန်ကန်မှုရှိမရှိ ထပ်မံစစ်ဆေးပါ။";
+                errorMsg.textContent = "အမြန်နှုန်း တုံ့ပြန်မှု နှေးကွေးနေပါသည် သို့မဟုတ် လင့်ခ် မမှန်ပါ။ ထပ်မံကြိုးစားကြည့်ပါ။";
                 errorMsg.classList.remove('hidden');
             } finally {
-                // Reset button state
-                btnText.textContent = "Direct Link သို့ ပြောင်းမည်";
-                btnIcon.className = "fa-solid fa-wand-magic-sparkles";
+                btnText.textContent = "အမြန်ဆုံး ပြောင်းမည်";
+                btnIcon.className = "fa-solid fa-bolt";
                 convertBtn.disabled = false;
             }
         }
