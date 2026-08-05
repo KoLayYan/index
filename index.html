@@ -56,7 +56,7 @@
                     <input 
                         type="url" 
                         id="mediafireUrl" 
-                        placeholder="https://www.mediafire.com/file/xxxxx/file.zip/file" 
+                        placeholder="https://www.mediafire.com/file/xxxxx/file.mp4/file" 
                         class="w-full pl-11 pr-4 py-4 bg-slate-900/80 border border-slate-700 rounded-2xl text-slate-100 placeholder-slate-500 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all text-sm md:text-base"
                     >
                 </div>
@@ -97,6 +97,18 @@
                     </div>
                 </div>
 
+                <!-- Video Preview Container (Initially Hidden) -->
+                <div id="videoPreviewContainer" class="hidden p-4 bg-slate-900/90 border border-slate-700/80 rounded-2xl space-y-2">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center">
+                        <i class="fa-solid fa-video text-purple-400 mr-1.5"></i> Video Preview Player
+                    </span>
+                    <div class="overflow-hidden rounded-xl bg-black border border-slate-800">
+                        <video id="videoPlayer" controls class="w-full max-h-80 object-contain">
+                            သင်၏ဘရောက်ဆာသည် ဗီဒီယိုဖွင့်ခြင်းကို မထောက်ပံ့ပါ။
+                        </video>
+                    </div>
+                </div>
+
                 <a 
                     id="downloadBtn" 
                     href="#" 
@@ -132,9 +144,16 @@
             const btnText = document.getElementById('btnText');
             const btnIcon = document.getElementById('btnIcon');
             const convertBtn = document.getElementById('convertBtn');
+            
+            // Video Preview Elements
+            const videoPreviewContainer = document.getElementById('videoPreviewContainer');
+            const videoPlayer = document.getElementById('videoPlayer');
 
             errorMsg.classList.add('hidden');
             resultContainer.classList.add('hidden');
+            videoPreviewContainer.classList.add('hidden');
+            videoPlayer.pause();
+            videoPlayer.src = "";
 
             if (!inputUrl || !inputUrl.includes('mediafire.com')) {
                 errorMsg.textContent = "ကျေးဇူးပြု၍ မှန်ကန်သော Mediafire Link တစ်ခုကို ထည့်သွင်းပါ။";
@@ -148,11 +167,10 @@
             convertBtn.disabled = true;
 
             try {
-                // Using a faster light proxy endpoint with timeout handling
                 const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(inputUrl)}`;
                 
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 seconds timeout
+                const timeoutId = setTimeout(() => controller.abort(), 8000);
 
                 const response = await fetch(proxyUrl, { signal: controller.signal });
                 clearTimeout(timeoutId);
@@ -170,6 +188,16 @@
                     directUrlOutput.value = directLink;
                     downloadBtn.href = directLink;
                     resultContainer.classList.remove('hidden');
+
+                    // Check if the link is a video file format
+                    const lowerLink = directLink.toLowerCase();
+                    const isVideo = ['.mp4', '.mkv', '.webm', '.ogg', '.mov', '.avi'].some(ext => lowerLink.includes(ext)) || 
+                                    inputUrl.toLowerCase().match(/\.(mp4|mkv|webm|ogg|mov|avi)/);
+
+                    if (isVideo) {
+                        videoPlayer.src = directLink;
+                        videoPreviewContainer.classList.remove('hidden');
+                    }
                 } else {
                     throw new Error("Direct link not found");
                 }
