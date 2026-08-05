@@ -1,186 +1,201 @@
 <!DOCTYPE html>
-<html lang="my" class="dark">
+<html lang="my" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediaFire Direct Link Generator Pro</title>
+    <title>Mediafire Direct Link Converter</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Google Font: Inter & Padauk -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', 'Padauk', sans-serif;
-            background: radial-gradient(circle at top right, #0f172a, #020617);
-        }
-        .glass-card {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+        body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body class="text-slate-100 min-h-screen flex flex-col items-center justify-between p-4 sm:p-6">
+<body class="bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 text-slate-100 h-full flex flex-col justify-between selection:bg-red-500 selection:text-white">
 
-    <!-- Header -->
-    <header class="w-full max-w-xl mx-auto text-center mb-6 pt-4">
-        <div class="inline-flex items-center justify-center p-3 bg-emerald-500/20 border border-emerald-500/30 rounded-2xl mb-3 text-emerald-400 shadow-lg">
-            <i data-lucide="zap" class="w-7 h-7"></i>
+    <!-- Header Section -->
+    <header class="w-full py-6 px-4 md:px-8 border-b border-slate-800/60 backdrop-blur-md bg-slate-900/50 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-red-600 p-2.5 rounded-xl shadow-lg shadow-red-600/30">
+                    <i class="fa-solid fa-bolt text-white text-lg"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+                    Mediafire Direct
+                </span>
+            </div>
+            <div class="text-xs font-medium px-3 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-slate-300">
+                <i class="fa-solid fa-shield-halved text-emerald-400 mr-1.5"></i>Secure & Fast
+            </div>
         </div>
-        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-1">
-            MediaFire <span class="text-emerald-400">Direct Link Pro</span>
-        </h1>
-        <p class="text-xs sm:text-sm text-slate-400">
-            MediaFire လင့်ခ်များကို မြန်ဆန်လွယ်ကူစွာ တိုက်ရိုက်လင့်ခ်ပြောင်းပါ။
-        </p>
     </header>
 
-    <!-- Main Card -->
-    <main class="w-full max-w-xl mx-auto flex-1 flex flex-col justify-center">
-        <div class="glass-card p-5 sm:p-7 rounded-3xl shadow-2xl relative overflow-hidden">
+    <!-- Main Container -->
+    <main class="flex-grow flex items-center justify-center px-4 py-12">
+        <div class="w-full max-w-2xl bg-slate-800/40 backdrop-blur-xl border border-slate-700/60 rounded-3xl p-6 md:p-10 shadow-2xl shadow-black/40">
             
-            <!-- Input Section -->
+            <!-- Title & Description -->
+            <div class="text-center mb-8">
+                <h1 class="text-2xl md:text-3xl font-bold tracking-tight mb-3">
+                    Mediafire Link Converter
+                </h1>
+                <p class="text-slate-400 text-sm md:text-base max-w-md mx-auto">
+                    Mediafire share link ထည့်ပါ၊ Direct Download Link အဖြစ်သို့ အမြန်ဆုံးပြောင်းလဲပေးပါမည်။
+                </p>
+            </div>
+
+            <!-- Input Box -->
             <div class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2 flex items-center gap-1.5">
-                        <i data-lucide="link" class="w-3.5 h-3.5 text-emerald-400"></i> MediaFire Share Link ထည့်ရန်
-                    </label>
-                    <div class="relative">
-                        <input type="text" id="mediafireUrl" placeholder="https://www.mediafire.com/file/..." 
-                            class="w-full pl-4 pr-24 py-3.5 bg-slate-900/90 border border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm text-slate-100 placeholder-slate-500">
-                        <button onclick="pasteLink()" class="absolute right-2 top-1.5 bottom-1.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium rounded-xl transition flex items-center gap-1 border border-slate-700">
-                            <i data-lucide="clipboard" class="w-3.5 h-3.5"></i> ကူးထည့်
-                        </button>
-                    </div>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-500">
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                    <input 
+                        type="url" 
+                        id="mediafireUrl" 
+                        placeholder="https://www.mediafire.com/file/xxxxx/file.zip/file" 
+                        class="w-full pl-11 pr-4 py-4 bg-slate-900/80 border border-slate-700 rounded-2xl text-slate-100 placeholder-slate-500 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all text-sm md:text-base"
+                    >
                 </div>
-                
-                <button onclick="generateLink()" 
-                    class="w-full bg-emerald-600 hover:bg-emerald-500 active:scale-[0.99] text-white py-3.5 px-6 rounded-2xl font-bold text-sm transition shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2">
-                    <i data-lucide="cpu" class="w-4 h-4"></i>
-                    <span>တိုက်ရိုက်လင့်ခ် ထုတ်ယူမည်</span>
+
+                <button 
+                    id="convertBtn"
+                    onclick="convertToDirectLink()" 
+                    class="w-full py-4 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-semibold rounded-2xl shadow-lg shadow-red-600/25 transition-all duration-200 flex items-center justify-center space-x-2 active:scale-[0.99]"
+                >
+                    <i class="fa-solid fa-wand-magic-sparkles" id="btnIcon"></i>
+                    <span id="btnText">Direct Link သို့ ပြောင်းမည်</span>
                 </button>
             </div>
 
-            <!-- Loading -->
-            <div id="loading" class="hidden text-center my-6">
-                <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-emerald-500 border-t-transparent"></div>
-                <p class="text-xs text-slate-300 mt-2">လင့်ခ်ကို ရှာဖွေနေပါသည်...</p>
-            </div>
-
-            <!-- Result Box -->
-            <div id="resultBox" class="mt-6 hidden space-y-4 border-t border-slate-700/60 pt-5">
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center gap-1">
-                        <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i> ရရှိလာသော တိုက်ရိုက်လင့်ခ်
-                    </label>
-                    <div class="flex gap-2">
-                        <input type="text" id="directUrl" readonly class="w-full px-3 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-slate-300 font-mono">
-                        <button onclick="copyResult()" class="bg-slate-700 hover:bg-slate-600 px-4 py-2.5 rounded-xl text-xs font-semibold transition text-white shrink-0">
-                            ကူးယူရန်
+            <!-- Result Box (Hidden by default) -->
+            <div id="resultContainer" class="mt-8 hidden space-y-4">
+                <div class="p-4 bg-slate-900/90 border border-slate-700/80 rounded-2xl">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mr-1.5"></i> Direct Download Link
+                        </span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <input 
+                            type="text" 
+                            id="directUrlOutput" 
+                            readonly 
+                            class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-300 font-mono select-all focus:outline-none"
+                        >
+                        <button 
+                            onclick="copyToClipboard()" 
+                            id="copyBtn"
+                            class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2.5 rounded-xl text-xs font-medium transition-all flex items-center space-x-1.5 shrink-0"
+                        >
+                            <i class="fa-regular fa-copy"></i>
+                            <span id="copyText">ကူးယူရန်</span>
                         </button>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-2">
-                    <a id="downloadBtn" href="#" target="_blank" class="flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl text-xs font-bold transition">
-                        <i data-lucide="download" class="w-4 h-4"></i> ဒေါင်းလုဒ်ဆွဲရန်
-                    </a>
-                    <a id="browserBtn" href="#" target="_blank" class="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white py-3 rounded-xl text-xs font-bold transition">
-                        <i data-lucide="external-link" class="w-4 h-4"></i> ဘရောက်ဆာဖွင့်ရန်
-                    </a>
-                </div>
+                <a 
+                    id="downloadBtn" 
+                    href="#" 
+                    target="_blank" 
+                    class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-sm transition-all flex items-center justify-center space-x-2 shadow-lg shadow-emerald-600/20"
+                >
+                    <i class="fa-solid fa-download"></i>
+                    <span>ယခုပင် ဒေါင်းလုပ်ဆွဲမည်</span>
+                </a>
             </div>
 
-            <!-- Error Box -->
-            <div id="errorBox" class="mt-5 hidden bg-red-950/50 border border-red-800 text-red-300 p-3.5 rounded-xl text-xs flex items-center gap-2">
-                <i data-lucide="alert-circle" class="w-4 h-4 text-red-400 shrink-0"></i>
-                <span id="errorText">အမှားအယွင်းရှိနေပါသည်။</span>
+            <!-- Error Notification -->
+            <div id="errorMsg" class="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-xs text-center hidden">
+                လင့်ခ်ကို ဖတ်ရှု၍မရပါ။ ကျေးဇူးပြု၍ မှန်ကန်သော Mediafire Link ဟုတ်မဟုတ် စစ်ဆေးပါ။
             </div>
 
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="w-full max-w-xl mx-auto text-center mt-6 text-xs text-slate-500">
-        <p>MediaFire Direct Link Generator &bull; Secure Web App</p>
+    <footer class="w-full py-4 text-center text-xs text-slate-500 border-t border-slate-800/60">
+        <p>&copy; 2026 Mediafire Direct Converter. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript Logic -->
+    <!-- JavaScript Direct Link Parser Logic -->
     <script>
-        lucide.createIcons();
+        async function convertToDirectLink() {
+            const inputUrl = document.getElementById('mediafireUrl').value.trim();
+            const resultContainer = document.getElementById('resultContainer');
+            const errorMsg = document.getElementById('errorMsg');
+            const directUrlOutput = document.getElementById('directUrlOutput');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const btnText = document.getElementById('btnText');
+            const btnIcon = document.getElementById('btnIcon');
+            const convertBtn = document.getElementById('convertBtn');
 
-        async function pasteLink() {
-            try {
-                const text = await navigator.clipboard.readText();
-                document.getElementById('mediafireUrl').value = text;
-            } catch (err) {
-                alert('ကလစ်ဘုတ်မှ ကူးယူခွင့် မရှိပါ။');
-            }
-        }
+            // Reset UI states
+            errorMsg.classList.add('hidden');
+            resultContainer.classList.add('hidden');
 
-        async function generateLink() {
-            const urlInput = document.getElementById('mediafireUrl').value.trim();
-            const resultBox = document.getElementById('resultBox');
-            const loading = document.getElementById('loading');
-            const errorBox = document.getElementById('errorBox');
-
-            resultBox.classList.add('hidden');
-            errorBox.classList.add('hidden');
-
-            if (!urlInput.includes('mediafire.com')) {
-                showError('မှန်ကန်သော MediaFire လင့်ခ် ထည့်သွင်းပါ။');
+            if (!inputUrl || !inputUrl.includes('mediafire.com')) {
+                errorMsg.textContent = "ကျေးဇူးပြု၍ မှန်ကန်သော Mediafire Link တစ်ခုကို ထည့်သွင်းပါ။";
+                errorMsg.classList.remove('hidden');
                 return;
             }
 
-            loading.classList.remove('hidden');
+            // Loading state
+            btnText.textContent = "ရှာဖွေနေသည်...";
+            btnIcon.className = "fa-solid fa-spinner fa-spin";
+            convertBtn.disabled = true;
 
             try {
-                // CORS ကျော်ရန် ယုံကြည်စိတ်ချရသော Public Proxy ကို အသုံးပြုခြင်း
-                const proxyUrl = `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(urlInput)}`;
+                // Using CORS proxy to fetch Mediafire share page HTML
+                const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(inputUrl)}`;
                 const response = await fetch(proxyUrl);
-                
-                if (!response.ok) throw new Error('ဆာဗာချိတ်ဆက်မှု မအောင်မြင်ပါ။');
+                const data = await response.json();
 
-                const htmlText = await response.text();
+                if (!data.contents) {
+                    throw new Error("Failed to fetch page");
+                }
+
+                // Parse HTML to find the direct download button (id="downloadButton")
                 const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlText, 'text/html');
+                const doc = parser.parseFromString(data.contents, 'text/html');
+                const downloadBtnElement = doc.querySelector('#downloadButton');
 
-                // MediaFire ၏ Download Button ID ကို တိုက်ရိုက်ရှာဖွေခြင်း
-                const downloadBtn = doc.getElementById('downloadButton');
-                const directLink = downloadBtn ? downloadBtn.getAttribute('href') : null;
-
-                loading.classList.add('hidden');
-
-                if (directLink && directLink.startsWith('http')) {
-                    document.getElementById('directUrl').value = directLink;
-                    document.getElementById('downloadBtn').href = directLink;
-                    document.getElementById('browserBtn').href = directLink;
-                    resultBox.classList.remove('hidden');
+                if (downloadBtnElement && downloadBtnElement.href) {
+                    const directLink = downloadBtnElement.href;
+                    
+                    // Display results
+                    directUrlOutput.value = directLink;
+                    downloadBtn.href = directLink;
+                    resultContainer.classList.remove('hidden');
                 } else {
-                    showError('တိုက်ရိုက်လင့်ခ် ထုတ်ယူ၍မရပါ။ လင့်ခ်အမျိုးအစားကို စစ်ဆေးပါ။');
+                    throw new Error("Direct link not found");
                 }
 
             } catch (err) {
-                loading.classList.add('hidden');
-                showError('ချိတ်ဆက်မှု အမှားအယွင်း ရှိနေပါသည်။ ခဏနေမှ ထပ်ကြိုးစားပါ။');
+                errorMsg.textContent = "Direct Link ထုတ်ယူ၍မရပါ။ လင့်ခ် မှန်ကန်မှုရှိမရှိ ထပ်မံစစ်ဆေးပါ။";
+                errorMsg.classList.remove('hidden');
+            } finally {
+                // Reset button state
+                btnText.textContent = "Direct Link သို့ ပြောင်းမည်";
+                btnIcon.className = "fa-solid fa-wand-magic-sparkles";
+                convertBtn.disabled = false;
             }
         }
 
-        function showError(msg) {
-            const errorBox = document.getElementById('errorBox');
-            document.getElementById('errorText').textContent = msg;
-            errorBox.classList.remove('hidden');
-        }
-
-        function copyResult() {
-            const copyText = document.getElementById('directUrl');
+        function copyToClipboard() {
+            const copyText = document.getElementById('directUrlOutput');
             copyText.select();
             navigator.clipboard.writeText(copyText.value);
-            alert('လင့်ခ်ကို ကူးယူပြီးပါပြီ။');
+
+            const btnText = document.getElementById('copyText');
+            btnText.textContent = 'ကူးယူပြီးပါပြီ!';
+            setTimeout(() => {
+                btnText.textContent = 'ကူးယူရန်';
+            }, 2000);
         }
     </script>
 </body>
 </html>
-
